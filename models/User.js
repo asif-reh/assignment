@@ -1,34 +1,31 @@
 const mongoose = require('mongoose');
 
-const addressSchema = new mongoose.Schema({
-  city: {
-    type: String,
-    required: true
-  },
-  street: {
-    type: String,
-    required: true
-  },
-  zipCode: {
-    type: String,
-    required: true
-  }
-});
-
-const userSchema = new mongoose.Schema({
+const City = mongoose.model('City', new mongoose.Schema({
   name: {
     type: String,
     required: true
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  address: {
-    type: addressSchema,
+  population: {
+    type: Number,
     required: true
   }
-});
+}));
 
-const User = mongoose.model('User', userSchema);
+// Create a new city
+const newCity = new City({
+  name: 'Bangalore',
+  population: 8623000
+});
+newCity.save();
+
+const newUser = new User({
+  name: 'Asif',
+  email: 'asifurrehman2509@gmail.com',
+  address: {
+    city: 'Guntur',
+    street: '13 th main',
+    zipCode: '522006'
+  }
+});
+newUser.save();
+
